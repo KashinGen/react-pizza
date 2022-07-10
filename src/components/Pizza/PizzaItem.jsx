@@ -3,7 +3,7 @@ import { useState } from 'react';
 const PizzaItem = ({ name, sizes, price, imageUrl, types }) => {
 	const [size, setSize] = useState(sizes[0]);
 	const [type, setType] = useState(types[0]);
-
+	const typeNames = ['тонкое', 'традиционное'];
 	return (
 		<div class="pizza-block">
 			<img class="pizza-block__image" src={imageUrl} alt="Pizza" />
@@ -13,11 +13,11 @@ const PizzaItem = ({ name, sizes, price, imageUrl, types }) => {
 					{types.map((item, index) => {
 						return (
 							<li
-								className={size === item ? 'active' : ''}
+								className={type === item ? 'active' : ''}
 								onClick={() => setType(item)}
 								key={item + index}
 							>
-								{item}
+								{typeNames[item]}
 							</li>
 						);
 					})}

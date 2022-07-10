@@ -1,37 +1,9 @@
 import { useState } from 'react';
 
-const sort = [
-	{
-		label: 'популярности',
-		value: 'popular',
-	},
-	{
-		label: 'цене',
-		value: 'price',
-	},
-	{
-		label: 'алфавиту',
-		value: 'alphabet',
-	},
-];
-
-const Sort = () => {
-	const [isSortOpen, setSortOpen] = useState(false);
-	const [chosen, setChosen] = useState(sort[0]);
-
-	const onChooseSortHandler = (item) => {
-		setChosen(item);
-		setSortOpen(false);
-	};
-
+const Sort = ({ onChooseSortHandler, chosen, isSortOpen, setSortOpen, sort }) => {
 	return (
 		<div class="sort">
-			<div
-				class="sort__label"
-				onClick={() => {
-					setSortOpen(!isSortOpen);
-				}}
-			>
+			<div class="sort__label" onClick={setSortOpen}>
 				<svg
 					width="10"
 					height="6"
