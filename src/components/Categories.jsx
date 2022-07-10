@@ -1,7 +1,5 @@
 import { useState } from 'react';
-const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
-const Categories = () => {
-	const [chosen, setChosen] = useState('Все');
+const Categories = ({ categories, chosen, onChooseHandler }) => {
 	return (
 		<div class="categories">
 			<ul>
@@ -11,9 +9,9 @@ const Categories = () => {
 							<li
 								key={item + index}
 								className={chosen === item ? 'active' : ''}
-								onClick={() => setChosen(item)}
+								onClick={() => onChooseHandler(item)}
 							>
-								{item}
+								{item.label}
 							</li>
 						);
 					})}
