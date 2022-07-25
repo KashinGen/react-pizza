@@ -45,7 +45,7 @@ const categories = [
 	},
 ];
 
-const Home = () => {
+const Home = ({ search }) => {
 	const [pizzas, setPizzas] = useState([]);
 	const [filteredPizzas, setFilteredPizzas] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -62,11 +62,10 @@ const Home = () => {
 	const onChooseCategoryHandler = (item) => {
 		setChosenCategory(item);
 		categoriesPizzas(item);
-		console.log(item);
 		const sorted = categoriesPizzas(item);
-		console.log(sorted);
 		setFilteredPizzas(sorted);
 	};
+
 	const categoriesPizzas = (item) => {
 		return item.value !== 'all'
 			? [...pizzas].filter((pizza) => pizza.category === +item.value)
@@ -105,6 +104,14 @@ const Home = () => {
 		getPizzas();
 	}, []);
 
+	useEffect(() => {
+		console.log(search);
+		let sorted = [...pizzas];
+		if (search !== '') {
+			sorted = [...pizzas].filter((pizza) => pizza.name.includes(search));
+		}
+		setFilteredPizzas(sorted);
+	}, [search]);
 	return (
 		<>
 			<div class="content__top">

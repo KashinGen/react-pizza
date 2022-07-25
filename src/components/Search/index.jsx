@@ -1,19 +1,21 @@
 import React from 'react';
+import { SearchContext } from '../../App';
 
 import styles from './Search.module.scss';
 
 const Search = () => {
 	const [value, setValue] = React.useState('');
 	const inputRef = React.useRef(null);
+	const { search, setSearch } = React.useContext(SearchContext);
 
 	const onClickClear = () => {
-		setValue('');
+		setSearch('');
 		inputRef.current?.focus();
 	};
 
 	const updateSearchValue = () => {};
 	const onChangeInput = (event) => {
-		setValue(event.target.value);
+		setSearch(event.target.value);
 		updateSearchValue(event.target.value);
 	};
 
@@ -55,12 +57,12 @@ const Search = () => {
 			</svg>
 			<input
 				ref={inputRef}
-				value={value}
+				value={search}
 				onChange={onChangeInput}
 				className={styles.input}
 				placeholder="Поиск пиццы..."
 			/>
-			{value && (
+			{search && (
 				<svg
 					onClick={onClickClear}
 					className={styles.clearIcon}
