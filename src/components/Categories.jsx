@@ -1,5 +1,6 @@
 import { useState } from 'react';
 const Categories = ({ categories, chosen, onChooseHandler }) => {
+	console.log(chosen, categories);
 	return (
 		<div class="categories">
 			<ul>
@@ -8,7 +9,7 @@ const Categories = ({ categories, chosen, onChooseHandler }) => {
 						return (
 							<li
 								key={item + index}
-								className={chosen === item ? 'active' : ''}
+								className={chosen.value === item.value ? 'active' : ''}
 								onClick={() => onChooseHandler(item)}
 							>
 								{item.label}

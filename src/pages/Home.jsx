@@ -3,8 +3,10 @@ import PizzaItem from '../components/Pizza/PizzaItem';
 import Loader from '../components/Pizza/Loader';
 import Sort from '../components/Sort';
 import Categories from '../components/Categories';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeSort, changeCategory } from '../redux/slice/filterSlice';
 
-const sort = [
+const sort1 = [
 	{
 		label: 'популярности',
 		value: 'rating',
@@ -50,17 +52,17 @@ const Home = ({ search }) => {
 	const [filteredPizzas, setFilteredPizzas] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSortOpen, setSortOpen] = useState(false);
-	const [chosen, setChosen] = useState(sort[0]);
-	const [chosenCategory, setChosenCategory] = useState(categories[0]);
-
+	const { categoryId, sort } = useSelector((state) => state.filter);
+	const dispatch = useDispatch();
 	const onChooseSortHandler = (item) => {
-		setChosen(item);
+		dispatch(changeSort(item));
 		setSortOpen(false);
 		const sorted = sortPizzas(item);
 		setFilteredPizzas(sorted);
 	};
+
 	const onChooseCategoryHandler = (item) => {
-		setChosenCategory(item);
+		dispatch(changeCategory(item));
 		categoriesPizzas(item);
 		const sorted = categoriesPizzas(item);
 		setFilteredPizzas(sorted);
@@ -117,15 +119,15 @@ const Home = ({ search }) => {
 			<div class="content__top">
 				<Categories
 					categories={categories}
-					chosen={chosenCategory}
+					chosen={categoryId}
 					onChooseHandler={onChooseCategoryHandler}
 				/>
 				<Sort
 					onChooseSortHandler={onChooseSortHandler}
 					setSortOpen={() => setSortOpen(!isSortOpen)}
-					chosen={chosen}
+					chosen={sort}
 					isSortOpen={isSortOpen}
-					sort={sort}
+					sort={sort1}
 				/>
 			</div>
 			<h2 class="content__title">Все пиццы</h2>
