@@ -93,11 +93,11 @@ const Home = ({ search }) => {
 
 	const getPizzas = async () => {
 		setIsLoading(true);
-		await fetch('/pizzas.json')
+		await fetch('https://631f1b4822cefb1edc42fd0a.mockapi.io/items')
 			.then((resp) => resp.json())
 			.then((data) => {
-				setPizzas(data.pizzas);
-				setFilteredPizzas(data.pizzas);
+				setPizzas(data);
+				setFilteredPizzas(data);
 				setIsLoading(false);
 			});
 	};
@@ -114,6 +114,7 @@ const Home = ({ search }) => {
 		}
 		setFilteredPizzas(sorted);
 	}, [search]);
+
 	return (
 		<>
 			<div class="content__top">
